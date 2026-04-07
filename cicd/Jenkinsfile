@@ -26,7 +26,7 @@ spec:
         - name: workspace
           mountPath: /workspace
     - name: kubectl
-      image: bitnami/kubectl:latest
+      image: google/cloud-sdk:slim
       command: ['cat']
       tty: true
   volumes:
@@ -92,7 +92,8 @@ spec:
       steps {
         container('kubectl') {
           sh """
-            kubectl apply -f ./cicd/back-deployment.yml
+            ls -al ${WORKSPACE}/cicd/back-deployment.yml
+            kubectl apply -f ${WORKSPACE}/cicd/back-deployment.yml
           """
         }
       }
