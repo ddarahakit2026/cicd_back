@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 3                 # Pod 3개 유지
+
+  selector:
+    matchLabels:
+      app: backend             # 이 라벨의 Pod를 관리
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1           # 업데이트 중 추가로 생성할 수
+      maxUnavailable: 0    # 업데이트 중 사용 불가 Pod 수
+
+  template:                  # Pod 템플릿 (metadata + spec)
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: ddarahakit2026/backend:latest
+          ports:
+            - containerPort: 8080
