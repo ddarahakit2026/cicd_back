@@ -84,17 +84,19 @@ spec:
         }
       }
     }
-
-    stages {
-        stage('Deploy') {
-          steps {
-            container('kubectl') {
-              sh """
-                kubectl apply -f ./cicd/backend-deployment.yml
-              """
-            }
-          }
+    stage('Deploy') {
+      steps {
+        container('kubectl') {
+          sh """
+            kubectl apply -f ./cicd/back-deployment.yml
+          """
         }
+      }
+    }
+    stage('Result') {
+      steps {
+        echo "Pushed: ${IMAGE_NAME}:${IMAGE_TAG}"
+      }
     }
   }
 }
