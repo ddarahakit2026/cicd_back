@@ -72,8 +72,8 @@ spec:
         container('kaniko') {
           sh """
             /kaniko/executor \
-              --context=${WORKSPACE} \
-              --dockerfile=${WORKSPACE}/Dockerfile \
+              --context=${WORKSPACE}/cicd \
+              --dockerfile=${WORKSPACE}/cicd/Dockerfile \
               --destination=${IMAGE_NAME}:${IMAGE_TAG} \
               --destination=${IMAGE_NAME}:latest \
               --single-snapshot \
