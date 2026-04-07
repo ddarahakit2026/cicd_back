@@ -50,7 +50,7 @@ spec:
         container('gradle') {
           checkout([$class: 'GitSCM',
             branches: [[name: '*/main']],
-            userRemoteConfigs: [[url: 'https://github.com/ddarahakit2026/cicd_backend.git']]
+            userRemoteConfigs: [[url: 'https://github.com/ddarahakit2026/cicd_back.git']]
           ])
         }
       }
@@ -85,10 +85,15 @@ spec:
       }
     }
 
-    stage('Result') {
-      steps {
-        echo "Pushed: ${IMAGE_NAME}:${IMAGE_TAG}"
-      }
-    }
+    stages {
+        stage('Deploy') {
+          steps {
+            container('kubectl') {
+              sh """
+                kubectl apply -f ./cicd/backend-deployment.yml
+              """
+            }
+          }
+        }
   }
 }
