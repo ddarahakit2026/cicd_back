@@ -93,7 +93,7 @@ spec:
         container('kubectl') {
           sh """
             ls -al ${WORKSPACE}/cicd/back-deployment.yml
-            kubectl apply -f ${WORKSPACE}/cicd/back-deployment.yml
+            kubectl apply -f ${WORKSPACE}/cicd/backend-deployment.yml
           """
         }
       }
